@@ -1,0 +1,8 @@
+{
+  "name": "midee",
+  "description": "Browser-native MIDI studio with an 88-key piano visualizer, live input, learn mode, looping, and 1080p MP4 recording.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

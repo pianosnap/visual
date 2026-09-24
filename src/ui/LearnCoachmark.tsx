@@ -1,0 +1,36 @@
+import { Coachmark } from './Coachmark'
+
+// First-encounter coachmark anchored to the topbar's "Learn" pill. Surfaces
+// once per browser profile, the first time a user lands in Play mode with a
+// loaded MIDI — long enough after the file load that they've had a moment to
+// orient.
+
+const STORAGE_KEY = 'midee.coachmark.learnShown'
+// 20 s after load, gone by 30 s — when the Export coachmark takes the strip.
+const SHOW_DELAY_MS = 20_000
+const AUTO_DISMISS_MS = 10_000
+const ANCHOR_ID = 'ts-learn-this'
+
+export function LearnCoachmark(props: { eligible: () => boolean; onShow?: () => void }) {
+  return (
+    <Coachmark
+      anchorId={ANCHOR_ID}
+      storageKey={STORAGE_KEY}
+      titleKey="coachmark.learn.title"
+      bodyKey="coachmark.learn.body"
+      showDelayMs={SHOW_DELAY_MS}
+      autoDismissMs={AUTO_DISMISS_MS}
+      placement="below"
+      eligible={props.eligible}
+      onShow={() => props.onShow?.()}
+    />
+  )
+}
+
+export function isLearnCoachmarkSeen(): boolean {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === '1'
+  } catch {
+    return false
+  }
+}
